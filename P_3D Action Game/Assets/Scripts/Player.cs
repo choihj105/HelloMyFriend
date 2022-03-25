@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
         // transform
-        transform.position += moveVec * speed * Time.deltaTime;
+        transform.position += moveVec * (wDown ? 1.3f : 1f) * speed * Time.deltaTime;
 
         // animator
         anim.SetBool("isWalk", moveVec != Vector3.zero);
