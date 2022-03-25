@@ -39,5 +39,8 @@ public class Player : MonoBehaviour
         // animator
         anim.SetBool("isWalk", moveVec != Vector3.zero);
         anim.SetBool("isRun", wDown);
+
+        // Rotation
+        transform.LookAt(transform.position + moveVec);
     }
 }
