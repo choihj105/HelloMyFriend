@@ -73,6 +73,9 @@ public class Player : MonoBehaviour
         {
             // 물리엔진에 힘을 준다. 여기선 즉발적인 Impulse
             rigid.AddForce(Vector3.up * 15, ForceMode.Impulse);
+            anim.SetBool("isJump", true);
+            anim.SetTrigger("doJump");
+
             isJump = true;
         }
 
@@ -85,6 +88,7 @@ public class Player : MonoBehaviour
         if(collision.gameObject.tag == "Floor")
         {
             isJump = false;
+            anim.SetBool("isJump", false);
         }
     }
 }
