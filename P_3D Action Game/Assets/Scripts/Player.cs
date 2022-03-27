@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
     float vAxis;
     bool rDown;
     bool jDown;
-    
+
+    bool isJump;
+
     Vector3 moveVec;
     Rigidbody rigid;
 
@@ -67,10 +69,22 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if(jDown)
+        if(jDown && !isJump)
         {
             // 물리엔진에 힘을 준다. 여기선 즉발적인 Impulse
             rigid.AddForce(Vector3.up * 15, ForceMode.Impulse);
+            isJump = true;
+        }
+
+        
+    }
+
+    // 충돌 시 이벤트 함수로 착지 구현
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Floor")
+        {
+            isJump = false;
         }
     }
 }
