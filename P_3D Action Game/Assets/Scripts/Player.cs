@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     bool isDodge;
 
     Vector3 moveVec;
+    Vector3 dodgeVec;
     Rigidbody rigid;
 
     Animator anim;
@@ -55,6 +56,11 @@ public class Player : MonoBehaviour
         // x y z
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
+        // 회피 시 업데이트 안되게
+        if (isDodge)
+            moveVec = dodgeVec;
+      
+
         // transform
         transform.position += moveVec * (rDown ? 1.3f : 1f) * speed * Time.deltaTime;
 
@@ -86,11 +92,12 @@ public class Player : MonoBehaviour
         // 이동하면서 점프할때, 
         if (jDown && moveVec != Vector3.zero && !isJump && !isDodge)
         {
+            dodgeVec = moveVec;
             speed *= 2;
             anim.SetTrigger("doDodge");
             isDodge = true;
 
-            Invoke("DodgeOut", 0.4f); // 시간지연 라이브러리 기능
+            Invoke("DodgeOut", 0.5f); // 시간지연 라이브러리 기능
         }
     }
 
