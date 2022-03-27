@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     bool jDown;
 
     bool isJump;
+    bool isDodge;
 
     Vector3 moveVec;
     Rigidbody rigid;
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
         Move();
         Turn();
         Jump();
+        Dodge();
     }
 
 
@@ -69,8 +71,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if(jDown && !isJump)
-        {
+        if(jDown && moveVec == Vector3.zero && !isJump && !isDodge) {
             // 물리엔진에 힘을 준다. 여기선 즉발적인 Impulse
             rigid.AddForce(Vector3.up * 15, ForceMode.Impulse);
             anim.SetBool("isJump", true);
@@ -78,15 +79,33 @@ public class Player : MonoBehaviour
 
             isJump = true;
         }
-
-        
     }
 
-    // 충돌 시 이벤트 함수로 착지 구현
-    void OnCollisionEnter(Collision collision)
+    void Dodge()
     {
-        if(collision.gameObject.tag == "Floor")
+        // 이동하면서 점프할때, 
+        if (jDown && moveVec != Vector3.zero && !isJump && !isDodge)
         {
+            speed *= 2;
+            anim.SetTrigger("doDodge");
+            isDodge = true;
+
+            Invoke("DodgeOut", 0.4f); // 시간지연 라이브러리 기능
+        }
+    }
+
+    void DodgeOut()
+    {
+        speed *= 0.5f;
+        isDodge = false;
+    }
+
+
+
+        // 충돌 시 이벤트 함수로 착지 구현
+        void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Floor"){
             isJump = false;
             anim.SetBool("isJump", false);
         }
