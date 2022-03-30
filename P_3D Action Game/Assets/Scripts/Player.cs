@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 
     bool isJump;
     bool isDodge;
+    bool isSwap;
 
     bool iDown;
     bool sDown1;
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
 
     GameObject nearObject;
     GameObject equipWeapon;
+    int equipWeaponIndex = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -77,7 +79,10 @@ public class Player : MonoBehaviour
         // 회피 시 업데이트 안되게
         if (isDodge)
             moveVec = dodgeVec;
-      
+        
+        // 스왑 시 못움직이게
+        if (isSwap)
+            moveVec = Vector3.zero;
 
         // transform
         transform.position += moveVec * (rDown ? 1.3f : 1f) * speed * Time.deltaTime;
@@ -127,19 +132,40 @@ public class Player : MonoBehaviour
     
     void Swap()
     {
+        if (sDown1 && (!hasWeapons[0] || equipWeaponIndex == 0))
+            return;
+        if (sDown2 && (!hasWeapons[1] || equipWeaponIndex == 1))
+            return;
+        if (sDown3 && (!hasWeapons[2] || equipWeaponIndex == 2))
+            return;
+
         int weaponIndex = -1;
         if (sDown1) weaponIndex = 0;
         if (sDown2) weaponIndex = 1;
         if (sDown3) weaponIndex = 2;
 
+        // 1, 2 ,3 버튼 누를때
         if((sDown1 || sDown2 || sDown3) && !isJump && !isDodge) {
             if(equipWeapon != null)
                 equipWeapon.SetActive(false);
-                equipWeapon = weapons[weaponIndex];
-                equipWeapon.SetActive(true);
+
+            equipWeaponIndex = weaponIndex;
+            equipWeapon = weapons[weaponIndex];
+            equipWeapon.SetActive(true);
+            
+            anim.SetTrigger("doSwap");
+            
+
+            // 스왑 중
+            isSwap = true;
+            Invoke("SwapOut", 0.4f);
+
         }
     }
-
+    void SwapOut()
+    {
+        isSwap = false;
+    }
 
     void Interation()
     {
