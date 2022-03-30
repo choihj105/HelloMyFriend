@@ -8,19 +8,34 @@ public class Player : MonoBehaviour
     public GameObject[] weapons;
     public bool[] hasWeapons;
 
+
+    public int ammo;
+    public int health;
+    public int coin;
+    public int hasGrenades; 
+    
+    public int maxAmmo;
+    public int maxHealth;
+    public int maxCoin;
+    public int maxHasGrenades;
+
+
+
     float hAxis;
     float vAxis;
+    
+    
+    
     bool rDown;
     bool jDown;
-
-    bool isJump;
-    bool isDodge;
-    bool isSwap;
-
     bool iDown;
     bool sDown1;
     bool sDown2;
     bool sDown3;
+
+    bool isJump;
+    bool isDodge;
+    bool isSwap;
 
     Vector3 moveVec;
     Vector3 dodgeVec;
@@ -185,6 +200,39 @@ public class Player : MonoBehaviour
         if(collision.gameObject.tag == "Floor"){
             isJump = false;
             anim.SetBool("isJump", false);
+        }
+    }
+
+    // æ∆¿Ã≈€ »πµÊ
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Item") {
+            Item item = other.GetComponent<Item>();
+            switch (item.type)
+            {
+                case Item.Type.Ammo:
+                    ammo += item.value;
+                    if (ammo > maxAmmo)
+                        ammo = maxAmmo;
+                    break;
+                case Item.Type.Coin:
+                    coin += item.value;
+                    if (coin > maxCoin)
+                        coin = maxCoin;
+                    break;
+                case Item.Type.Heart:
+                    health += item.value;
+                    if (health > maxHealth)
+                        health = maxHealth;
+                    break;
+                case Item.Type.Grenade:
+                    hasGrenades += item.value;
+                    if (hasGrenades > maxHasGrenades)
+                        hasGrenades = maxHasGrenades;
+                    break;
+            }
+
+            Destroy(other.gameObject);
         }
     }
 
