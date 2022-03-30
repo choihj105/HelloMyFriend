@@ -1538,9 +1538,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8412861689158079007, guid: c0350974083ece0428b389c3fe760ccb, type: 3}
+      propertyPath: value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9215086124729302347, guid: c0350974083ece0428b389c3fe760ccb, type: 3}
       propertyPath: m_Name
       value: Weapon Grenade
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215086124729302347, guid: c0350974083ece0428b389c3fe760ccb, type: 3}
+      propertyPath: m_TagString
+      value: Item
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0350974083ece0428b389c3fe760ccb, type: 3}
@@ -1676,6 +1684,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Ammo
       objectReference: {fileID: 0}
+    - target: {fileID: 2054359166969569679, guid: a40f404583a30a64e9fe19005a2f1489, type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
+    - target: {fileID: 2616742513261992430, guid: a40f404583a30a64e9fe19005a2f1489, type: 3}
+      propertyPath: value
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a40f404583a30a64e9fe19005a2f1489, type: 3}
 --- !u!1001 &3576613932556808569
@@ -1733,6 +1749,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coin Bronze
       objectReference: {fileID: 0}
+    - target: {fileID: 841139985603892774, guid: 59abb040f465b4c47a18176b5cdda990, type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
     - target: {fileID: 3576613932491645225, guid: 59abb040f465b4c47a18176b5cdda990, type: 3}
       propertyPath: value
       value: 0
@@ -1749,6 +1769,10 @@ PrefabInstance:
     - target: {fileID: 5808973853320549562, guid: 7720c83e7e61faa478b73d33d51ce0bf, type: 3}
       propertyPath: m_Name
       value: Coin Silver
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808973853320549562, guid: 7720c83e7e61faa478b73d33d51ce0bf, type: 3}
+      propertyPath: m_TagString
+      value: Item
       objectReference: {fileID: 0}
     - target: {fileID: 6617562866591747584, guid: 7720c83e7e61faa478b73d33d51ce0bf, type: 3}
       propertyPath: m_RootOrder
@@ -1884,6 +1908,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coin Gold
       objectReference: {fileID: 0}
+    - target: {fileID: 521473411184598120, guid: dc0faaea75cafd94c9d9eca6f35cc313, type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
     - target: {fileID: 898316261585864402, guid: dc0faaea75cafd94c9d9eca6f35cc313, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1937,6 +1965,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2714194747509133712, guid: 4e6ffaca2478e5a49b4e91f18df04f72, type: 3}
+      propertyPath: value
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8600505484253594948, guid: 4e6ffaca2478e5a49b4e91f18df04f72, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -1984,6 +2016,10 @@ PrefabInstance:
     - target: {fileID: 8939911923022716926, guid: 4e6ffaca2478e5a49b4e91f18df04f72, type: 3}
       propertyPath: m_Name
       value: Item Heart
+      objectReference: {fileID: 0}
+    - target: {fileID: 8939911923022716926, guid: 4e6ffaca2478e5a49b4e91f18df04f72, type: 3}
+      propertyPath: m_TagString
+      value: Item
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e6ffaca2478e5a49b4e91f18df04f72, type: 3}

@@ -208,8 +208,7 @@ public class Player : MonoBehaviour
     {
         if(other.tag == "Item") {
             Item item = other.GetComponent<Item>();
-            switch (item.type)
-            {
+            switch (item.type){
                 case Item.Type.Ammo:
                     ammo += item.value;
                     if (ammo > maxAmmo)
@@ -231,7 +230,6 @@ public class Player : MonoBehaviour
                         hasGrenades = maxHasGrenades;
                     break;
             }
-
             Destroy(other.gameObject);
         }
     }
