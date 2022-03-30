@@ -226,9 +226,10 @@ public class Player : MonoBehaviour
                         health = maxHealth;
                     break;
                 case Item.Type.Grenade:
+                    if (hasGrenades == maxHasGrenades)
+                        return;
+                    grenades[hasGrenades].SetActive(true);
                     hasGrenades += item.value;
-                    if (hasGrenades > maxHasGrenades)
-                        hasGrenades = maxHasGrenades;
                     break;
             }
             Destroy(other.gameObject);
