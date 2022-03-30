@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     public GameObject[] weapons;
     public bool[] hasWeapons;
 
-
     float hAxis;
     float vAxis;
     bool rDown;
