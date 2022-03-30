@@ -5,6 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed;
+    public GameObject[] weapons;
+    public bool[] hasWeapons;
+
+
     float hAxis;
     float vAxis;
     bool rDown;
@@ -13,11 +17,19 @@ public class Player : MonoBehaviour
     bool isJump;
     bool isDodge;
 
+    bool iDown;
+    bool sDown1;
+    bool sDown2;
+    bool sDown3;
+
     Vector3 moveVec;
     Vector3 dodgeVec;
     Rigidbody rigid;
 
     Animator anim;
+
+    GameObject nearObject;
+    GameObject equipWeapon;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +51,8 @@ public class Player : MonoBehaviour
         Turn();
         Jump();
         Dodge();
+        Interation();
+        Swap();
     }
 
 
@@ -49,6 +63,10 @@ public class Player : MonoBehaviour
         vAxis = Input.GetAxisRaw("Vertical");
         rDown = Input.GetButton("Run");
         jDown = Input.GetButtonDown("Jump");
+        iDown = Input.GetButtonDown("Interation");
+        sDown1 = Input.GetButtonDown("Swap1");
+        sDown2 = Input.GetButtonDown("Swap2");
+        sDown3 = Input.GetButtonDown("Swap3");
     }
 
     void Move()
@@ -106,15 +124,53 @@ public class Player : MonoBehaviour
         speed *= 0.5f;
         isDodge = false;
     }
+    
+    void Swap()
+    {
+        int weaponIndex = -1;
+        if (sDown1) weaponIndex = 0;
+        if (sDown2) weaponIndex = 1;
+        if (sDown3) weaponIndex = 2;
+
+        if((sDown1 || sDown2 || sDown3) && !isJump && !isDodge) {
+            if(equipWeapon != null)
+                equipWeapon.SetActive(false);
+                equipWeapon = weapons[weaponIndex];
+                equipWeapon.SetActive(true);
+        }
+    }
 
 
+    void Interation()
+    {
+        if(iDown && nearObject != null && !isJump && !isDodge) {
+            if(nearObject.tag == "Weapon") {
+                Item item = nearObject.GetComponent<Item>();
+                int weaponIndex = item.value;
+                hasWeapons[weaponIndex] = true;
 
-        // 충돌 시 이벤트 함수로 착지 구현
-        void OnCollisionEnter(Collision collision)
+                Destroy(nearObject);
+            }
+        }
+    }
+
+    // 충돌 시 이벤트 함수로 착지 구현
+    void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Floor"){
             isJump = false;
             anim.SetBool("isJump", false);
         }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Weapon")
+            nearObject = other.gameObject;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Weapon")
+            nearObject = null;
     }
 }
