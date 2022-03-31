@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     bool isJump;
     bool isDodge;
     bool isSwap;
-    bool isFireReady;
+    bool isFireReady = true;
 
     Vector3 moveVec;
     Vector3 dodgeVec;
@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
         Dodge();
         Interation();
         Swap();
+        Attack();
     }
 
 
@@ -93,8 +94,8 @@ public class Player : MonoBehaviour
         if (isDodge)
             moveVec = dodgeVec;
         
-        // 스왑 시 못움직이게
-        if (isSwap)
+        // 스왑 및 공격 시 못움직이게
+        if (isSwap || !isFireReady)
             moveVec = Vector3.zero;
 
         // transform
