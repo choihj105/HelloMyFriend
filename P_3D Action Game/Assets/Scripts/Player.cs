@@ -25,8 +25,6 @@ public class Player : MonoBehaviour
     float hAxis;
     float vAxis;
     
-    
-    
     bool rDown;
     bool jDown;
     bool fDown;
@@ -135,7 +133,7 @@ public class Player : MonoBehaviour
 
         if(fDown && isFireReady && !isDodge && !isSwap) {
             equipWeapon.Use();
-            anim.SetTrigger("doSwing");
+            anim.SetTrigger(equipWeapon.type == Weapon.Type.Melee ? "doSwing" : "doShot");
             fireDelay = 0;
         }
     }
