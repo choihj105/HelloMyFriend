@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public bool[] hasWeapons;
     public GameObject[] grenades;
     public int hasGrenades;
-
+    public Camera followCamera;
 
     public int ammo;
     public int health;
@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     bool rDown;
     bool jDown;
     bool fDown;
+    bool reDown;
     bool iDown;
     bool sDown1;
     bool sDown2;
@@ -36,7 +37,9 @@ public class Player : MonoBehaviour
     bool isJump;
     bool isDodge;
     bool isSwap;
+    bool isReload;
     bool isFireReady = true;
+    
 
     Vector3 moveVec;
     Vector3 dodgeVec;
@@ -62,10 +65,13 @@ public class Player : MonoBehaviour
         Move();
         Turn();
         Jump();
-        Dodge();
-        Interation();
-        Swap();
         Attack();
+        Reload();
+        Dodge();
+        Swap();
+        Interation();
+        
+        
     }
 
 
@@ -76,7 +82,8 @@ public class Player : MonoBehaviour
         vAxis = Input.GetAxisRaw("Vertical");
         rDown = Input.GetButton("Run");
         jDown = Input.GetButtonDown("Jump");
-        fDown = Input.GetButtonDown("Fire1");
+        reDown = Input.GetButtonDown("Reload");
+        fDown = Input.GetButton("Fire1");
         iDown = Input.GetButtonDown("Interation");
         sDown1 = Input.GetButtonDown("Swap1");
         sDown2 = Input.GetButtonDown("Swap2");
@@ -93,7 +100,7 @@ public class Player : MonoBehaviour
             moveVec = dodgeVec;
         
         // 스왑 및 공격 시 못움직이게
-        if (isSwap || !isFireReady)
+        if (isSwap || !isFireReady || isReload)
             moveVec = Vector3.zero;
 
         // transform
@@ -106,8 +113,24 @@ public class Player : MonoBehaviour
 
     void Turn()
     {
-        // Rotation
+        // #1. 키보드에 의한 회전
         transform.LookAt(transform.position + moveVec);
+
+        // #2. 마우스에 의한 회전
+
+        // Ray란?, ScreenPointToRay() : 스크린에서 월드로 Ray를 쏘는 함수
+        if(fDown)
+        {
+            Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rayHit;
+            // out 키워드는, 반환값을 주어진 변수에 저장하는 키워드
+            if (Physics.Raycast(ray, out rayHit, 100))
+            {
+                Vector3 nextVec = rayHit.point;
+                nextVec.y = 0;
+                transform.LookAt(nextVec);
+            }
+        }
     }
 
     void Jump()
@@ -137,6 +160,33 @@ public class Player : MonoBehaviour
             fireDelay = 0;
         }
     }
+
+    void Reload()
+    {
+        if (equipWeapon == null)
+            return;
+        if (equipWeapon.type == Weapon.Type.Melee)
+            return;
+        if (ammo == 0)
+            return;
+
+        if(reDown && !isJump && !isDodge && !isSwap && isFireReady)
+        {
+            anim.SetTrigger("doReload");
+            isReload = true;
+
+            Invoke("ReloadOut", 2f);
+        }
+    }
+
+    void ReloadOut()
+    {
+        int reAmmo = ammo < equipWeapon.maxAmmo ? ammo : equipWeapon.maxAmmo;
+        equipWeapon.curAmmo = reAmmo;
+        ammo -= reAmmo;
+        isReload = false;
+    }
+
 
     void Dodge()
     {

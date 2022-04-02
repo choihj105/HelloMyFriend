@@ -142,8 +142,8 @@ GameObject:
   - component: {fileID: 72162745}
   - component: {fileID: 72162749}
   m_Layer: 0
-  m_Name: Wall (1)
-  m_TagString: Untagged
+  m_Name: Wall
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -10262,6 +10262,8 @@ MonoBehaviour:
   bullet: {fileID: 8035971443037687602, guid: 3b2db55fefb29184aab64a63b0b4f58f, type: 3}
   bulletCasePos: {fileID: 1293903778}
   bulletCase: {fileID: 8579887340106699044, guid: d64222800de606b4cbb867b5b15a1e1e, type: 3}
+  maxAmmo: 30
+  curAmmo: 30
 --- !u!1 &338324667
 GameObject:
   m_ObjectHideFlags: 0
@@ -10722,7 +10724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1509416925549156319, guid: a2e051660762cbe4494c17a095a95e10, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2285952976136801637, guid: a2e051660762cbe4494c17a095a95e10, type: 3}
       propertyPath: m_RootOrder
@@ -10898,6 +10900,8 @@ MonoBehaviour:
   bullet: {fileID: 0}
   bulletCasePos: {fileID: 204045084}
   bulletCase: {fileID: 0}
+  maxAmmo: 0
+  curAmmo: 0
 --- !u!1001 &951350955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15954,8 +15958,8 @@ GameObject:
   - component: {fileID: 969226842}
   - component: {fileID: 969226846}
   m_Layer: 0
-  m_Name: Wall (2)
-  m_TagString: Untagged
+  m_Name: Wall
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -16059,13 +16063,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7197627901100712791, guid: 3bcd2c3da6b5414488c8c0c81c22f180, type: 3}
+      propertyPath: value
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7240660031125795040, guid: 3bcd2c3da6b5414488c8c0c81c22f180, type: 3}
       propertyPath: m_Name
       value: Weapon SubMachineGun
       objectReference: {fileID: 0}
     - target: {fileID: 7240660031125795040, guid: 3bcd2c3da6b5414488c8c0c81c22f180, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8011953503351040602, guid: 3bcd2c3da6b5414488c8c0c81c22f180, type: 3}
       propertyPath: m_RootOrder
@@ -16073,15 +16081,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8011953503351040602, guid: 3bcd2c3da6b5414488c8c0c81c22f180, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 8011953503351040602, guid: 3bcd2c3da6b5414488c8c0c81c22f180, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.44
       objectReference: {fileID: 0}
     - target: {fileID: 8011953503351040602, guid: 3bcd2c3da6b5414488c8c0c81c22f180, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5.44
       objectReference: {fileID: 0}
     - target: {fileID: 8011953503351040602, guid: 3bcd2c3da6b5414488c8c0c81c22f180, type: 3}
       propertyPath: m_LocalRotation.w
@@ -21037,7 +21045,7 @@ GameObject:
   - component: {fileID: 1099285277}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -21147,7 +21155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 383792316819577669, guid: 9eed57130ac760c4e9b6120311bc1b28, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1015651569862853119, guid: 9eed57130ac760c4e9b6120311bc1b28, type: 3}
       propertyPath: m_RootOrder
@@ -21155,11 +21163,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1015651569862853119, guid: 9eed57130ac760c4e9b6120311bc1b28, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5.79
       objectReference: {fileID: 0}
     - target: {fileID: 1015651569862853119, guid: 9eed57130ac760c4e9b6120311bc1b28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.02
       objectReference: {fileID: 0}
     - target: {fileID: 1015651569862853119, guid: 9eed57130ac760c4e9b6120311bc1b28, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21239,8 +21247,8 @@ GameObject:
   - component: {fileID: 1320844405}
   - component: {fileID: 1320844409}
   m_Layer: 0
-  m_Name: Wall (3)
-  m_TagString: Untagged
+  m_Name: Wall
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -21471,7 +21479,7 @@ MonoBehaviour:
   - {fileID: 91765178}
   - {fileID: 1443607190}
   hasGrenades: 0
-  ammo: 0
+  ammo: 100
   health: 100
   coin: 0
   maxAmmo: 999
@@ -21544,6 +21552,8 @@ MonoBehaviour:
   bullet: {fileID: 1471329603213834934, guid: 73063697b0723494aa61afc7ef7357a3, type: 3}
   bulletCasePos: {fileID: 204045084}
   bulletCase: {fileID: 8579887340106699044, guid: d64222800de606b4cbb867b5b15a1e1e, type: 3}
+  maxAmmo: 7
+  curAmmo: 7
 --- !u!1 &1984657128 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7209417620919649187, guid: 10653eccf6b69fd47938a227b4bf3863, type: 3}
