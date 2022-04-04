@@ -4814,8 +4814,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3536296778899578555}
   - component: {fileID: 2949029180587126330}
-  - component: {fileID: 2949029180587126328}
   - component: {fileID: 2949029180587126329}
+  - component: {fileID: 2949029180587126328}
   - component: {fileID: 2949029180587126332}
   m_Layer: 0
   m_Name: Weapon Hammer
@@ -4857,19 +4857,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &2949029180587126328
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4204290038208037889}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!135 &2949029180587126329
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4882,6 +4869,19 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!135 &2949029180587126328
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4204290038208037889}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &2949029180587126332
 MonoBehaviour:
