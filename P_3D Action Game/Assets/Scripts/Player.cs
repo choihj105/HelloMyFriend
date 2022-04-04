@@ -167,7 +167,7 @@ public class Player : MonoBehaviour
             return;
         if (equipWeapon.type == Weapon.Type.Melee)
             return;
-        if (ammo == 0)
+        if (ammo == 0 || equipWeapon.curAmmo == equipWeapon.maxAmmo)
             return;
 
         if(reDown && !isJump && !isDodge && !isSwap && isFireReady)
@@ -181,8 +181,10 @@ public class Player : MonoBehaviour
 
     void ReloadOut()
     {
-        int reAmmo = ammo < equipWeapon.maxAmmo ? ammo : equipWeapon.maxAmmo;
-        equipWeapon.curAmmo = reAmmo;
+        int reAmmo = equipWeapon.maxAmmo - equipWeapon.curAmmo;
+        reAmmo = ammo < reAmmo ? ammo : reAmmo;
+
+        equipWeapon.curAmmo += reAmmo;
         ammo -= reAmmo;
         isReload = false;
     }

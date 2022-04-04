@@ -21479,6 +21479,7 @@ MonoBehaviour:
   - {fileID: 91765178}
   - {fileID: 1443607190}
   hasGrenades: 0
+  followCamera: {fileID: 963194227}
   ammo: 100
   health: 100
   coin: 0
