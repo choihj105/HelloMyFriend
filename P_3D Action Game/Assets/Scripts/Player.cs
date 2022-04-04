@@ -189,7 +189,6 @@ public class Player : MonoBehaviour
         isReload = false;
     }
 
-
     void Dodge()
     {
         // 이동하면서 점프할때, 
@@ -258,6 +257,15 @@ public class Player : MonoBehaviour
                 Destroy(nearObject);
             }
         }
+    }
+
+    void FreezeRotation()
+    {
+        rigid.angularVelocity = Vector3.zero;
+    }
+    void FixedUpdate()
+    {
+        FreezeRotation();
     }
 
     // 충돌 시 이벤트 함수로 착지 구현
