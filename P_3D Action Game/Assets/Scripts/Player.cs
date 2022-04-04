@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
             moveVec = dodgeVec;
         
         // 스왑 및 공격 시 못움직이게
-        if (isSwap || !isFireReady || isReload)
+        if (isSwap || !isFireReady)
             moveVec = Vector3.zero;
 
         // transform
@@ -175,11 +175,11 @@ public class Player : MonoBehaviour
             anim.SetTrigger("doReload");
             isReload = true;
 
-            Invoke("ReloadOut", 2f);
+            // Invoke("ReloadOut", 2f); -> 애니메이션 기능에 ReloadOut() 기능 구현했습니다.
         }
     }
 
-    void ReloadOut()
+    public void ReloadOut()
     {
         int reAmmo = equipWeapon.maxAmmo - equipWeapon.curAmmo;
         reAmmo = ammo < reAmmo ? ammo : reAmmo;
