@@ -34,6 +34,8 @@ public class Enemy : MonoBehaviour
             curHealth -= bullet.damage;
             Vector3 reactVec = transform.position - other.transform.position;
 
+            Destroy(other.gameObject);
+
             StartCoroutine(OnDamage(reactVec));
         }
     }
