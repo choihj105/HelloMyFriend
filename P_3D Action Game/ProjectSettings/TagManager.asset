@@ -10,8 +10,8 @@ TagManager:
   - Melee
   - Range
   - Wall
-  - PlayerBullet
   - BulletCase
+  - Bullet
   layers:
   - Default
   - TransparentFX
