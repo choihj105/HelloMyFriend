@@ -24,5 +24,20 @@ public class Grenade : MonoBehaviour
 
         meshObj.SetActive(false);
         effectObj.SetActive(true);
+
+
+
+        // 피격범위 레이캐스트
+        // SphereCastAll: 구체모양의 레이캐스팅 (모든 오브젝트)
+        RaycastHit[] rayHits =
+           Physics.SphereCastAll(transform.position,
+                                15, Vector3.up, 0f,
+                                LayerMask.GetMask("Enemy"));
+        foreach(RaycastHit hitObj in rayHits) {
+            hitObj.transform.GetComponent<Enemy>().HitByGrenade(transform.position);
+        }
+
+        Destroy(gameObject, 5);
+
     }
 }

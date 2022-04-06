@@ -40,7 +40,15 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    IEnumerator OnDamage(Vector3 reactVec)
+            
+    public void HitByGrenade(Vector3 explosionPos)
+    {
+        curHealth -= 100;
+        Vector3 reactVec = transform.position - explosionPos;
+        StartCoroutine(OnDamage(reactVec, true));
+    }
+
+    IEnumerator OnDamage(Vector3 reactVec, bool isGrenade = false)
     {
         mat.color = Color.red;
         yield return new WaitForSeconds(0.1f);
@@ -53,10 +61,22 @@ public class Enemy : MonoBehaviour
             gameObject.layer = 12;
 
             // Á×¾úÀ» ½Ã, ³Ë¹é
-            reactVec = reactVec.normalized;
-            reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 5, ForceMode.Impulse);
 
+            if (isGrenade)
+            {
+                reactVec = reactVec.normalized;
+                reactVec += Vector3.up * 3;
+
+                rigid.freezeRotation = false; // freezeRotation
+                rigid.AddForce(reactVec * 5, ForceMode.Impulse);
+                rigid.AddTorque(reactVec * 15, ForceMode.Impulse);
+            }
+            else
+            {
+                reactVec = reactVec.normalized;
+                reactVec += Vector3.up;
+                rigid.AddForce(reactVec * 5, ForceMode.Impulse);
+            }
             Destroy(gameObject, 4);
         }
     }
