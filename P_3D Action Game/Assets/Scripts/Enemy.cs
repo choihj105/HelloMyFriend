@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
     public int maxHealth;
     public int curHealth;
+    public Transform Target;
+    public bool isChase;
 
     Rigidbody rigid;
     BoxCollider boxCollider;
     Material mat;
+    NavMeshAgent nav;
+    Animator anim;
 
     void Awake()
     {
@@ -17,7 +22,40 @@ public class Enemy : MonoBehaviour
         boxCollider = GetComponent<BoxCollider>();
 
         // Material은 Mesh Renderer 컴포넌트에서 접근가능합니다.
-        mat = GetComponent<MeshRenderer>().material;
+        mat = GetComponentInChildren<MeshRenderer>().material;
+        // 네비게이션
+        nav = GetComponent<NavMeshAgent>();
+        //애니메이션
+        anim = GetComponentInChildren<Animator>();
+
+        Invoke("ChaseStart", 2);
+
+    }
+
+    void ChaseStart()
+    {
+        isChase = true;
+        anim.SetBool("isWalk", true);
+
+    }
+
+    void Update()
+    {
+        if(isChase)
+            nav.SetDestination(Target.position);
+    }
+
+    void FreezeVelocity()
+    {
+        if (isChase) {
+            rigid.velocity = Vector3.zero;
+            rigid.angularVelocity = Vector3.zero;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        FreezeVelocity();
     }
 
     void OnTriggerEnter(Collider other)
@@ -27,7 +65,7 @@ public class Enemy : MonoBehaviour
             curHealth -= weapon.damage;
             Vector3 reactVec = transform.position - other.transform.position;
 
-            StartCoroutine(OnDamage(reactVec));
+            StartCoroutine(OnDamage(reactVec, false));
         }
         else if(other.tag == "Bullet"){
             Bullet bullet = other.GetComponent<Bullet>();
@@ -36,7 +74,7 @@ public class Enemy : MonoBehaviour
 
             Destroy(other.gameObject);
 
-            StartCoroutine(OnDamage(reactVec));
+            StartCoroutine(OnDamage(reactVec, false));
         }
     }
 
@@ -48,7 +86,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine(OnDamage(reactVec, true));
     }
 
-    IEnumerator OnDamage(Vector3 reactVec, bool isGrenade = false)
+    IEnumerator OnDamage(Vector3 reactVec, bool isGrenade)
     {
         mat.color = Color.red;
         yield return new WaitForSeconds(0.1f);
@@ -59,6 +97,10 @@ public class Enemy : MonoBehaviour
         else {
             mat.color = Color.gray;
             gameObject.layer = 12;
+            isChase = false;
+            nav.enabled = false;
+            anim.SetTrigger("doDie");
+
 
             // 죽었을 시, 넉백
 

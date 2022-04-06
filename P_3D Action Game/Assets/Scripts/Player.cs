@@ -158,7 +158,6 @@ public class Player : MonoBehaviour
 
         if(gDown && !isReload && !isSwap) {
 
-            Debug.Log("실행");
             Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
             // out 키워드는, 반환값을 주어진 변수에 저장하는 키워드
