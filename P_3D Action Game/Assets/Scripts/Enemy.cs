@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public int curHealth;
     public Transform Target;
     public BoxCollider melleArea;
+    public GameObject bullet;
     public bool isChase;
     public bool isAttack;
 
@@ -77,6 +78,8 @@ public class Enemy : MonoBehaviour
                 break;
 
             case Type.C:
+                targetRadius = 0.5f;
+                targetRange = 25f;
                 break;
         }
 
