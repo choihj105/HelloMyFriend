@@ -5199,6 +5199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  isMelee: 1
 --- !u!33 &178927941
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10704,11 +10705,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3320669544841490502, guid: 06d503bba93001142b96e3510906db62, type: 3}
   m_PrefabInstance: {fileID: 603767288}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &603767290 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6698954167970170456, guid: 06d503bba93001142b96e3510906db62, type: 3}
-  m_PrefabInstance: {fileID: 603767288}
-  m_PrefabAsset: {fileID: 0}
 --- !u!195 &603767291
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -10748,6 +10744,7 @@ MonoBehaviour:
   curHealth: 200
   Target: {fileID: 1970511561}
   melleArea: {fileID: 0}
+  bullet: {fileID: 6775609310153872952, guid: 71d741fe9012c08468ab6cf3130c4234, type: 3}
   isChase: 0
   isAttack: 0
 --- !u!65 &603767293
@@ -10786,7 +10783,7 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 603767290}
+  m_GameObject: {fileID: 1910087646}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 0c1a3476fbf2cea43bf2a701d5fd7208, type: 2}
@@ -10911,7 +10908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5903297864969995812, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.46
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5903297864969995812, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10919,7 +10916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5903297864969995812, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.74
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5903297864969995812, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -16573,6 +16570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  isMelee: 1
 --- !u!33 &1002928130
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -22086,7 +22084,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187343066701982198, guid: 4198e2587d1fcca4cb87c16c3cfed34d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9187343066701982198, guid: 4198e2587d1fcca4cb87c16c3cfed34d, type: 3}
       propertyPath: m_TagString
@@ -22126,6 +22124,7 @@ MonoBehaviour:
   curHealth: 80
   Target: {fileID: 1970511561}
   melleArea: {fileID: 178927939}
+  bullet: {fileID: 0}
   isChase: 0
   isAttack: 0
 --- !u!195 &1903236059
@@ -22198,6 +22197,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1910087646 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6698954167970170456, guid: 06d503bba93001142b96e3510906db62, type: 3}
+  m_PrefabInstance: {fileID: 603767288}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1970511557 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5461052779654786451, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
@@ -22488,7 +22492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 328409505970683906, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 328409505970683906, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
       propertyPath: m_TagString
@@ -22606,6 +22610,7 @@ MonoBehaviour:
   curHealth: 50
   Target: {fileID: 1970511561}
   melleArea: {fileID: 1002928128}
+  bullet: {fileID: 0}
   isChase: 0
   isAttack: 0
 --- !u!65 &2090259237

@@ -124,6 +124,12 @@ public class Enemy : MonoBehaviour
                 break;
 
             case Type.C:
+                yield return new WaitForSeconds(0.5f);
+                GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
+                Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
+                rigidBullet.velocity = transform.forward * 20;
+
+                yield return new WaitForSeconds(2f);
                 break;
         }
         
