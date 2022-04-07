@@ -5,10 +5,14 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    public enum Type { A, B, C };
+    public Type enemyType;
     public int maxHealth;
     public int curHealth;
     public Transform Target;
+    public BoxCollider melleArea;
     public bool isChase;
+    public bool isAttack;
 
     Rigidbody rigid;
     BoxCollider boxCollider;
@@ -56,8 +60,78 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void Targeting()
+    {
+        float targetRadius = 0;
+        float targetRange = 0;
+
+        switch (enemyType) {
+            case Type.A:
+                targetRadius = 1.5f;
+                targetRange = 3f;
+                break;
+
+            case Type.B:
+                targetRadius = 1f;
+                targetRange = 12f;
+                break;
+
+            case Type.C:
+                break;
+        }
+
+
+        RaycastHit[] rayHits =
+            Physics.SphereCastAll(transform.position,
+                                   targetRadius,
+                                   transform.forward,
+                                   targetRange,
+                                   LayerMask.GetMask("Player"));
+
+        if(rayHits.Length > 0 && !isAttack) {
+            StartCoroutine(Attack());
+        }
+    }
+
+    IEnumerator Attack()
+    {
+        isChase = false;
+        isAttack = true;
+        anim.SetBool("isAttack", true);
+
+        switch (enemyType) {
+            case Type.A:
+                yield return new WaitForSeconds(0.2f);
+                melleArea.enabled = true;
+
+                yield return new WaitForSeconds(1f);
+                melleArea.enabled = false;
+                break;
+
+            case Type.B:
+                yield return new WaitForSeconds(0.1f);
+                rigid.AddForce(transform.forward * 20, ForceMode.Impulse);
+                melleArea.enabled = true;
+
+                yield return new WaitForSeconds(0.5f);
+                rigid.velocity = Vector3.zero;
+                melleArea.enabled = false;
+
+                yield return new WaitForSeconds(2f);
+                break;
+
+            case Type.C:
+                break;
+        }
+        
+        isChase = true;
+        isAttack = false;
+        anim.SetBool("isAttack", false);
+    }
+
     void FixedUpdate()
     {
+        Targeting();
         FreezeVelocity();
     }
 
