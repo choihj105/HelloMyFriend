@@ -14,7 +14,7 @@ public class Boss : Enemy
 
     void Start()
     {
-        
+        isLook = true;
     }
 
     
