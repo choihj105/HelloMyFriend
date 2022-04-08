@@ -21,8 +21,6 @@ public class Player : MonoBehaviour
     public int maxCoin;
     public int maxHasGrenades;
 
-
-
     float hAxis;
     float vAxis;
     
