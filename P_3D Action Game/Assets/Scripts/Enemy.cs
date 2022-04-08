@@ -14,12 +14,13 @@ public class Enemy : MonoBehaviour
     public GameObject bullet;
     public bool isChase;
     public bool isAttack;
+    public bool isDead;
 
-    Rigidbody rigid;
-    BoxCollider boxCollider;
-    MeshRenderer[] meshs;
-    NavMeshAgent nav;
-    Animator anim;
+    public Rigidbody rigid;
+    public BoxCollider boxCollider;
+    public MeshRenderer[] meshs;
+    public NavMeshAgent nav;
+    public Animator anim;
 
     void Awake()
     {
@@ -64,7 +65,7 @@ public class Enemy : MonoBehaviour
 
     void Targeting()
     {
-        if (enemyType != Type.D)
+        if (!isDead && enemyType != Type.D)
         {
             float targetRadius = 0;
             float targetRange = 0;
@@ -181,22 +182,23 @@ public class Enemy : MonoBehaviour
 
     IEnumerator OnDamage(Vector3 reactVec, bool isGrenade)
     {
-        foreach (MeshRenderer mesh in meshs){
+        foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.red;
-        }
+        
         yield return new WaitForSeconds(0.1f);
 
         if(curHealth > 0) {
-            foreach (MeshRenderer mesh in meshs){
+            foreach (MeshRenderer mesh in meshs)
                 mesh.material.color = Color.white;
-            }
+            
         }
         else {
-            foreach (MeshRenderer mesh in meshs){
+            foreach (MeshRenderer mesh in meshs)
                 mesh.material.color = Color.gray;
-            }
+            
             
             gameObject.layer = 12;
+            isDead = true;
             isChase = false;
             nav.enabled = false;
             anim.SetTrigger("doDie");
