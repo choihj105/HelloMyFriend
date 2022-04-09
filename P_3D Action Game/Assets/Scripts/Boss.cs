@@ -45,7 +45,7 @@ public class Boss : Enemy
         else
             nav.SetDestination(tauntVec);
     }
-
+     
     IEnumerator Think()
     {
         yield return new WaitForSeconds(0.1f);
