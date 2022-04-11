@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public int ammo;
     public int health;
     public int coin;
-    
+
     public int maxAmmo;
     public int maxHealth;
     public int maxCoin;
@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
 
     float hAxis;
     float vAxis;
-    
+
     bool rDown;
     bool jDown;
     bool fDown;
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
     Vector3 moveVec;
     Vector3 dodgeVec;
-    
+
     Rigidbody rigid;
     Animator anim;
     MeshRenderer[] meshs;
@@ -74,8 +74,8 @@ public class Player : MonoBehaviour
         Dodge();
         Swap();
         Interation();
-        
-        
+
+
     }
 
 
@@ -103,7 +103,7 @@ public class Player : MonoBehaviour
         // 회피 시 업데이트 안되게
         if (isDodge)
             moveVec = dodgeVec;
-        
+
         // 스왑 및 공격 시 못움직이게
         if (isSwap || !isFireReady)
             moveVec = Vector3.zero;
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
         // #2. 마우스에 의한 회전
 
         // Ray란?, ScreenPointToRay() : 스크린에서 월드로 Ray를 쏘는 함수
-        if(fDown)
+        if (fDown)
         {
             Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
@@ -142,7 +142,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if(jDown && moveVec == Vector3.zero && !isJump && !isDodge) {
+        if (jDown && moveVec == Vector3.zero && !isJump && !isDodge) {
             // 물리엔진에 힘을 준다. 여기선 즉발적인 Impulse
             rigid.AddForce(Vector3.up * 15, ForceMode.Impulse);
             anim.SetBool("isJump", true);
@@ -157,7 +157,7 @@ public class Player : MonoBehaviour
         if (hasGrenades == 0)
             return;
 
-        if(gDown && !isReload && !isSwap) {
+        if (gDown && !isReload && !isSwap) {
 
             Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
@@ -188,7 +188,7 @@ public class Player : MonoBehaviour
         fireDelay += Time.deltaTime;
         isFireReady = equipWeapon.rate < fireDelay;
 
-        if(fDown && isFireReady && !isDodge && !isSwap) {
+        if (fDown && isFireReady && !isDodge && !isSwap) {
             equipWeapon.Use();
             anim.SetTrigger(equipWeapon.type == Weapon.Type.Melee ? "doSwing" : "doShot");
             fireDelay = 0;
@@ -204,7 +204,7 @@ public class Player : MonoBehaviour
         if (ammo == 0 || equipWeapon.curAmmo == equipWeapon.maxAmmo)
             return;
 
-        if(reDown && !isJump && !isDodge && !isSwap && isFireReady)
+        if (reDown && !isJump && !isDodge && !isSwap && isFireReady)
         {
             anim.SetTrigger("doReload");
             isReload = true;
@@ -242,7 +242,7 @@ public class Player : MonoBehaviour
         speed *= 0.5f;
         isDodge = false;
     }
-    
+
     void Swap()
     {
         if (sDown1 && (!hasWeapons[0] || equipWeaponIndex == 0))
@@ -258,16 +258,16 @@ public class Player : MonoBehaviour
         if (sDown3) weaponIndex = 2;
 
         // 1, 2 ,3 버튼 누를때
-        if((sDown1 || sDown2 || sDown3) && !isJump && !isDodge) {
-            if(equipWeapon != null)
+        if ((sDown1 || sDown2 || sDown3) && !isJump && !isDodge) {
+            if (equipWeapon != null)
                 equipWeapon.gameObject.SetActive(false);
 
             equipWeaponIndex = weaponIndex;
             equipWeapon = weapons[weaponIndex].GetComponent<Weapon>();
             equipWeapon.gameObject.SetActive(true);
-            
+
             anim.SetTrigger("doSwap");
-            
+
 
             // 스왑 중
             isSwap = true;
@@ -282,21 +282,27 @@ public class Player : MonoBehaviour
 
     void Interation()
     {
-        if(iDown && nearObject != null && !isJump && !isDodge) {
-            if(nearObject.tag == "Weapon") {
+        if (iDown && nearObject != null && !isJump && !isDodge) {
+            if (nearObject.tag == "Weapon") {
                 Item item = nearObject.GetComponent<Item>();
                 int weaponIndex = item.value;
                 hasWeapons[weaponIndex] = true;
 
                 Destroy(nearObject);
             }
+            else if (nearObject.tag == "Shop")
+            {
+                Shop shop = nearObject.GetComponent<Shop>();
+                shop.Enter(this);
+            }
         }
+        
     }
 
     void FreezeRotation()
     {
         rigid.angularVelocity = Vector3.zero;
-        
+
     }
 
     void StopToWall()
@@ -315,7 +321,7 @@ public class Player : MonoBehaviour
     // 충돌 시 이벤트 함수로 착지 구현
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Floor"){
+        if (collision.gameObject.tag == "Floor") {
             isJump = false;
             anim.SetBool("isJump", false);
         }
@@ -324,9 +330,9 @@ public class Player : MonoBehaviour
     // 아이템 획득
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Item") {
+        if (other.tag == "Item") {
             Item item = other.GetComponent<Item>();
-            switch (item.type){
+            switch (item.type) {
                 case Item.Type.Ammo:
                     ammo += item.value;
                     if (ammo > maxAmmo)
@@ -367,10 +373,10 @@ public class Player : MonoBehaviour
 
     }
 
-    IEnumerator OnDamage(bool isBossAtk) 
+    IEnumerator OnDamage(bool isBossAtk)
     {
         isDamage = true;
-        foreach(MeshRenderer mesh in meshs) {
+        foreach (MeshRenderer mesh in meshs) {
             mesh.material.color = Color.yellow;
         }
 
@@ -394,12 +400,18 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Weapon")
+        if (other.tag == "Weapon" || other.tag == "Shop")
             nearObject = other.gameObject;
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Weapon")
             nearObject = null;
+        else if (other.tag == "Shop")
+        {
+            Shop shop = nearObject.GetComponent<Shop>();
+            shop.Exit();
+            nearObject = null;
+        }
     }
 }
