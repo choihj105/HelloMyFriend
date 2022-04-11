@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     bool isFireReady = true;
     bool isBorder;
     bool isDamage;
+    bool isShop;
 
     Vector3 moveVec;
     Vector3 dodgeVec;
@@ -188,7 +189,7 @@ public class Player : MonoBehaviour
         fireDelay += Time.deltaTime;
         isFireReady = equipWeapon.rate < fireDelay;
 
-        if (fDown && isFireReady && !isDodge && !isSwap) {
+        if (fDown && isFireReady && !isDodge && !isSwap && !isShop) {
             equipWeapon.Use();
             anim.SetTrigger(equipWeapon.type == Weapon.Type.Melee ? "doSwing" : "doShot");
             fireDelay = 0;
@@ -204,7 +205,7 @@ public class Player : MonoBehaviour
         if (ammo == 0 || equipWeapon.curAmmo == equipWeapon.maxAmmo)
             return;
 
-        if (reDown && !isJump && !isDodge && !isSwap && isFireReady)
+        if (reDown && !isJump && !isDodge && !isSwap && isFireReady && !isShop)
         {
             anim.SetTrigger("doReload");
             isReload = true;
@@ -226,7 +227,7 @@ public class Player : MonoBehaviour
     void Dodge()
     {
         // 이동하면서 점프할때, 
-        if (jDown && moveVec != Vector3.zero && !isJump && !isDodge)
+        if (jDown && moveVec != Vector3.zero && !isJump && !isDodge && !isShop)
         {
             dodgeVec = moveVec;
             speed *= 2;
@@ -258,7 +259,7 @@ public class Player : MonoBehaviour
         if (sDown3) weaponIndex = 2;
 
         // 1, 2 ,3 버튼 누를때
-        if ((sDown1 || sDown2 || sDown3) && !isJump && !isDodge) {
+        if ((sDown1 || sDown2 || sDown3) && !isJump && !isDodge && !isShop) {
             if (equipWeapon != null)
                 equipWeapon.gameObject.SetActive(false);
 
@@ -294,6 +295,7 @@ public class Player : MonoBehaviour
             {
                 Shop shop = nearObject.GetComponent<Shop>();
                 shop.Enter(this);
+                isShop = true;
             }
         }
         
@@ -411,6 +413,7 @@ public class Player : MonoBehaviour
         {
             Shop shop = nearObject.GetComponent<Shop>();
             shop.Exit();
+            isShop = false;
             nearObject = null;
         }
     }
