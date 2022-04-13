@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject menuCam;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject menuPanel;
     public GameObject gamePanel;
+    public GameObject overPanel;
     public Text maxScoreTxt;
     public Text scoreTxt;
     public Text stageTxt;
@@ -41,7 +43,8 @@ public class GameManager : MonoBehaviour
     public Text enemyCTxt;
     public RectTransform bossHealthGroup;
     public RectTransform bossHealthBar;
-
+    public Text curScoreText;
+    public Text bestText;
     void Awake()
     {
         enemyList = new List<int>();
@@ -57,6 +60,23 @@ public class GameManager : MonoBehaviour
         gamePanel.SetActive(true);
 
         player.gameObject.SetActive(true);
+    }
+     public void GameOver()
+    {
+        gamePanel.SetActive(false);
+        overPanel.SetActive(true);
+        curScoreText.text = scoreTxt.text;
+
+        int maxScore = PlayerPrefs.GetInt("MaxScore");
+        if(player.score > maxScore) {
+            bestText.gameObject.SetActive(true);
+            PlayerPrefs.SetInt("MaxScore", player.score);
+        }
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void StageStart()
@@ -184,11 +204,11 @@ public class GameManager : MonoBehaviour
         // 보스 체력 UI
         if (boss != null)
         {
-            bossHealthGroup.anchoredPosition = Vector3.down * 30;
+            bossHealthGroup.anchoredPosition = Vector3.up * 300;
             bossHealthBar.localScale = new Vector3((float)boss.curHealth / boss.maxHealth, 1, 1);
         }
         else {
-            bossHealthGroup.anchoredPosition = Vector3.down * 200;
+            bossHealthGroup.anchoredPosition = Vector3.down * 30;
         }
     }
 }
