@@ -62,8 +62,8 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         meshs = GetComponentsInChildren<MeshRenderer>();
 
-        Debug.Log(PlayerPrefs.GetInt("MaxScore"));
-        //PlayerPrefs.SetInt("MaxScore", 100000);
+        
+        PlayerPrefs.SetInt("MaxScore", 100000);
     }
 
     // Update is called once per frame

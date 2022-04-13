@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public GameObject gameCam;
     public Player player;
     public Boss boss;
+    public GameObject itemShop;
+    public GameObject weaponShop;
+    public GameObject startZone;
     public int stage;
     public float playTime;
     public bool isBattle;
@@ -48,6 +51,35 @@ public class GameManager : MonoBehaviour
         gamePanel.SetActive(true);
 
         player.gameObject.SetActive(true);
+    }
+
+    public void StageStart()
+    {
+        isBattle = true;
+        StartCoroutine(InBattle());
+        
+        itemShop.SetActive(false);
+        weaponShop.SetActive(false);
+        startZone.SetActive(false);
+        
+    }
+    
+    public void StageEnd()
+    {
+        player.transform.position = Vector3.up * 0.8f;
+
+        itemShop.SetActive(true);
+        weaponShop.SetActive(true);
+        startZone.SetActive(true);
+
+        isBattle = false;
+        stage++;
+    }
+
+    IEnumerator InBattle()
+    {
+        yield return new WaitForSeconds(5f);
+        StageEnd();
     }
 
     void Update()
