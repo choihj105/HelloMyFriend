@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public int maxHealth;
     public int curHealth;
     public int score;
+    public GameManager manager;
     public Transform Target;
     public BoxCollider melleArea;
     public GameObject bullet;
@@ -211,6 +212,23 @@ public class Enemy : MonoBehaviour
             int ranCoin = Random.Range(0, 3);
             Instantiate(coins[ranCoin], transform.position, Quaternion.identity);
 
+
+            switch (enemyType){
+                case Type.A:
+                    manager.enemyCntA--;
+                    break;                
+                case Type.B:
+                    manager.enemyCntB--;
+                    break;                
+                case Type.C:
+                    manager.enemyCntC--;
+                    break;                
+                case Type.D:
+                    manager.enemyCntD--;
+                    break;
+            }
+
+
             // Á×¾úÀ» ½Ã, ³Ë¹é
 
             if (isGrenade)
@@ -229,8 +247,8 @@ public class Enemy : MonoBehaviour
                 rigid.AddForce(reactVec * 5, ForceMode.Impulse);
             }
             
-            if(enemyType != Type.D)
-                Destroy(gameObject, 4);
+            
+            Destroy(gameObject, 4);
         }
     }
 }
