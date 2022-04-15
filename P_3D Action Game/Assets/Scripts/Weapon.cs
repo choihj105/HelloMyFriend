@@ -16,6 +16,7 @@ public class Weapon : MonoBehaviour
     public GameObject bullet;
     public Transform bulletCasePos;
     public GameObject bulletCase;
+    public SoundControl soundControl;
 
     public int maxAmmo;
     public int curAmmo;
@@ -41,9 +42,10 @@ public class Weapon : MonoBehaviour
         // 코루틴 : Use() 메인루틴 + Swing() 코루틴 Co - (동시실행)
 
         // yield : 결과를 전달하는 키워드, 여러 개 사용해 시간차 로직 구현가능
-        
+
+        soundControl.swingSound.Play();
         //1
-        yield return new WaitForSeconds(0.1f); // 0.1 초 대기
+        yield return new WaitForSeconds(0.2f); // 0.2 초 대기
         meleeArea.enabled = true;
         trailEffect.enabled = true;
 
@@ -60,6 +62,7 @@ public class Weapon : MonoBehaviour
 
     IEnumerator Shot()
     {
+        soundControl.shotSound.Play();
         // 1. 총알 발사 , Instantiate() 함수로 총알 인스턴스화 하기
         GameObject instantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
         Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();

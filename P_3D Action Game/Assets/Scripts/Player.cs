@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public Camera followCamera;
     public GameManager gamemanager;
 
-    public AudioSource jumpsound;
+    public SoundControl soundControl;
 
     public int ammo;
     public int health;
@@ -66,8 +66,6 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         meshs = GetComponentsInChildren<MeshRenderer>();
 
-        
-        PlayerPrefs.SetInt("MaxScore", 0);
     }
 
     // Update is called once per frame
@@ -159,7 +157,7 @@ public class Player : MonoBehaviour
 
             isJump = true;
 
-            jumpsound.Play();
+            soundControl.jumpSound.Play();
         }
     }
 
@@ -187,6 +185,8 @@ public class Player : MonoBehaviour
                 hasGrenades--;
                 grenades[hasGrenades].SetActive(false);
             }
+
+            soundControl.ThrowSound.Play();
         }
     }
 
@@ -245,6 +245,7 @@ public class Player : MonoBehaviour
             isDodge = true;
 
             Invoke("DodgeOut", 0.5f); // 시간지연 라이브러리 기능
+            soundControl.dodgeSound.Play();
         }
     }
 
@@ -307,6 +308,7 @@ public class Player : MonoBehaviour
                 shop.Enter(this);
                 isShop = true;
             }
+            soundControl.InteractSound.Play();
         }
         
     }
@@ -368,6 +370,7 @@ public class Player : MonoBehaviour
                     break;
             }
             Destroy(other.gameObject);
+            soundControl.InteractSound.Play();
         }
         else if (other.tag == "EnemyBullet") {
             if (!isDamage) {
@@ -380,6 +383,8 @@ public class Player : MonoBehaviour
 
             if (other.GetComponent<Rigidbody>() != null)
                 Destroy(other.gameObject);
+
+            soundControl.playerOnDamageSound.Play();
         }
 
 

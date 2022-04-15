@@ -197,35 +197,40 @@ public class Enemy : MonoBehaviour
             
         }
         else {
-            foreach (MeshRenderer mesh in meshs)
-                mesh.material.color = Color.gray;
-            
-            
-            gameObject.layer = 12;
-            isDead = true;
-            isChase = false;
-            nav.enabled = false;
-            anim.SetTrigger("doDie");
-            Player player = Target.GetComponent<Player>();
-            player.score += score;
-
-            int ranCoin = Random.Range(0, 3);
-            Instantiate(coins[ranCoin], transform.position, Quaternion.identity);
+            if (!isDead)
+            {
+                foreach (MeshRenderer mesh in meshs)
+                    mesh.material.color = Color.gray;
 
 
-            switch (enemyType){
-                case Type.A:
-                    manager.enemyCntA--;
-                    break;                
-                case Type.B:
-                    manager.enemyCntB--;
-                    break;                
-                case Type.C:
-                    manager.enemyCntC--;
-                    break;                
-                case Type.D:
-                    manager.enemyCntD--;
-                    break;
+                gameObject.layer = 12;
+                isDead = true;
+                isChase = false;
+                nav.enabled = false;
+                anim.SetTrigger("doDie");
+                Player player = Target.GetComponent<Player>();
+                player.score += score;
+
+                int ranCoin = Random.Range(0, 3);
+                Instantiate(coins[ranCoin], transform.position, Quaternion.identity);
+                yield return new WaitForSeconds(0.1f);
+
+
+                switch (enemyType)
+                {
+                    case Type.A:
+                        manager.enemyCntA--;
+                        break;
+                    case Type.B:
+                        manager.enemyCntB--;
+                        break;
+                    case Type.C:
+                        manager.enemyCntC--;
+                        break;
+                    case Type.D:
+                        manager.enemyCntD--;
+                        break;
+                }
             }
 
 

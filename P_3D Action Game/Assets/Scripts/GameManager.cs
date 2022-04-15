@@ -48,7 +48,10 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         enemyList = new List<int>();
-        maxScoreTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore")); 
+        maxScoreTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
+
+        if (PlayerPrefs.HasKey("MaxScore"))
+            PlayerPrefs.SetInt("MaxScore", 0);
     }
 
     public void GameStart()
@@ -86,6 +89,7 @@ public class GameManager : MonoBehaviour
         weaponShop.SetActive(false);
         startZone.SetActive(false);
 
+        player.transform.position = Vector3.up * 0.8f;
         foreach (Transform zone in enemyZones)
             zone.gameObject.SetActive(true);
 
@@ -167,6 +171,7 @@ public class GameManager : MonoBehaviour
     {
         if (isBattle)
             playTime += Time.deltaTime;
+        
     }
 
     void LateUpdate() //Update 끝난 후 호출되는 생명주기
@@ -191,10 +196,10 @@ public class GameManager : MonoBehaviour
             playerAmmoTxt.text = player.equipWeapon.curAmmo + " / " + player.ammo;
 
         // 무기 UI
-        weapon1Img.color = new Color(1, 1, 1, player.hasWeapons[0] ? 1 : 0);
-        weapon2Img.color = new Color(1, 1, 1, player.hasWeapons[1] ? 1 : 0);
-        weapon3Img.color = new Color(1, 1, 1, player.hasWeapons[2] ? 1 : 0);
-        weaponRImg.color = new Color(1, 1, 1, player.hasGrenades > 0 ? 1 : 0);
+        weapon1Img.color = new Color(1, 1, 1, player.hasWeapons[0] ? 1 : 0.3f);
+        weapon2Img.color = new Color(1, 1, 1, player.hasWeapons[1] ? 1 : 0.3f);
+        weapon3Img.color = new Color(1, 1, 1, player.hasWeapons[2] ? 1 : 0.3f);
+        weaponRImg.color = new Color(1, 1, 1, player.hasGrenades > 0 ? 1 : 0.3f);
 
         // 몬스터 숫자 UI
         enemyATxt.text = "x " + enemyCntA.ToString();
@@ -204,11 +209,11 @@ public class GameManager : MonoBehaviour
         // 보스 체력 UI
         if (boss != null)
         {
-            bossHealthGroup.anchoredPosition = Vector3.up * 300;
+            bossHealthGroup.anchoredPosition = Vector3.down * 30;
             bossHealthBar.localScale = new Vector3((float)boss.curHealth / boss.maxHealth, 1, 1);
         }
         else {
-            bossHealthGroup.anchoredPosition = Vector3.down * 30;
+            bossHealthGroup.anchoredPosition = Vector3.up * 300;
         }
     }
 }
