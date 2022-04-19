@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     public RectTransform bossHealthBar;
     public Text curScoreText;
     public Text bestText;
+
+    public SoundControl soundControl;
     void Awake()
     {
         enemyList = new List<int>();
@@ -121,6 +123,7 @@ public class GameManager : MonoBehaviour
             Enemy enemy = instantEnemy.GetComponent<Enemy>();
             enemy.Target = player.transform;
             enemy.manager = this;
+            enemy.soundControl = soundControl;
             boss = instantEnemy.GetComponent<Boss>();
             
 
@@ -153,6 +156,7 @@ public class GameManager : MonoBehaviour
                 Enemy enemy = instantEnemy.GetComponent<Enemy>();
                 enemy.Target = player.transform;
                 enemy.manager = this;
+                enemy.soundControl = soundControl;
                 enemyList.RemoveAt(0);
                 yield return new WaitForSeconds(4f);
             }

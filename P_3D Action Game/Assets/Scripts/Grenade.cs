@@ -7,7 +7,7 @@ public class Grenade : MonoBehaviour
     public GameObject meshObj;
     public GameObject effectObj;
     public Rigidbody rigid;
-
+    public AudioSource audioSource;
     void Start()
     {
         StartCoroutine(Explosion());
@@ -37,7 +37,10 @@ public class Grenade : MonoBehaviour
             hitObj.transform.GetComponent<Enemy>().HitByGrenade(transform.position);
         }
 
+        audioSource.Play();
         Destroy(gameObject, 5);
+        //audioSource.Play();
+
 
     }
 }

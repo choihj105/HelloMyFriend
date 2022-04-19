@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
     public MeshRenderer[] meshs;
     public NavMeshAgent nav;
     public Animator anim;
-
+    public SoundControl soundControl;
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
         //애니메이션
         anim = GetComponentInChildren<Animator>();
 
-        if(enemyType != Type.D)
+        if (enemyType != Type.D)
             Invoke("ChaseStart", 2);
 
     }
@@ -113,7 +113,7 @@ public class Enemy : MonoBehaviour
         isChase = false;
         isAttack = true;
         anim.SetBool("isAttack", true);
-
+        
         switch (enemyType) {
             case Type.A:
                 yield return new WaitForSeconds(0.2f);
@@ -140,6 +140,7 @@ public class Enemy : MonoBehaviour
                 GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
                 Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
                 rigidBullet.velocity = transform.forward * 20;
+                soundControl.missileSound.Play();
 
                 yield return new WaitForSeconds(2f);
                 break;
@@ -188,13 +189,12 @@ public class Enemy : MonoBehaviour
     {
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.red;
-        
         yield return new WaitForSeconds(0.1f);
 
         if(curHealth > 0) {
             foreach (MeshRenderer mesh in meshs)
                 mesh.material.color = Color.white;
-            
+            soundControl.enemyOnDamageSound.Play();
         }
         else {
             if (!isDead)

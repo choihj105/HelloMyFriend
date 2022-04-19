@@ -123,8 +123,21 @@ public class Player : MonoBehaviour
         // animator
         anim.SetBool("isWalk", moveVec != Vector3.zero);
         anim.SetBool("isRun", rDown);
-    }
 
+        // sound
+        if(soundControl.walkSound.isPlaying == false && moveVec != Vector3.zero && !isJump && !isDodge && !isDead) {
+            soundControl.walkSound.volume = Random.Range(0.1f, 0.2f);
+
+            if (rDown) 
+                soundControl.walkSound.pitch = Random.Range(2.6f, 2.65f);
+            else 
+                soundControl.walkSound.pitch = Random.Range(2.1f, 2.2f);
+            
+            soundControl.walkSound.Play();
+        }
+        
+    }
+    
     void Turn()
     {
         // #1. 키보드에 의한 회전
@@ -181,7 +194,6 @@ public class Player : MonoBehaviour
                 Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
                 rigidGrenade.AddForce(nextVec, ForceMode.Impulse);
                 rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
-
                 hasGrenades--;
                 grenades[hasGrenades].SetActive(false);
             }
@@ -221,7 +233,10 @@ public class Player : MonoBehaviour
             isReload = true;
 
             // Invoke("ReloadOut", 2f); -> 애니메이션 기능에 ReloadOut() 기능 구현했습니다.
+            
         }
+        
+        
     }
 
     public void ReloadOut()
@@ -232,6 +247,8 @@ public class Player : MonoBehaviour
         equipWeapon.curAmmo += reAmmo;
         ammo -= reAmmo;
         isReload = false;
+
+        soundControl.reloadSound.Play();
     }
 
     void Dodge()
@@ -279,6 +296,7 @@ public class Player : MonoBehaviour
             equipWeapon.gameObject.SetActive(true);
 
             anim.SetTrigger("doSwap");
+            soundControl.swapSound.Play();
 
 
             // 스왑 중
@@ -338,6 +356,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Floor") {
             isJump = false;
             anim.SetBool("isJump", false);
+            soundControl.landSound.Play();
         }
     }
 
