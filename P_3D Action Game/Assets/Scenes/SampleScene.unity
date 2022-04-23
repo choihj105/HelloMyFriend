@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 40359a09e6619f84a9186b86c37b13e2, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -10478,7 +10478,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -34683,7 +34683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  damage: 30
+  damage: 1500
   rate: 0.6
   meleeArea: {fileID: 910864146}
   trailEffect: {fileID: 255147159}
@@ -53584,7 +53584,7 @@ MonoBehaviour:
   itemShop: {fileID: 2093094488}
   weaponShop: {fileID: 261627020}
   startZone: {fileID: 1883507928}
-  stage: 1
+  stage: 5
   playTime: 0
   isBattle: 0
   enemyCntA: 0

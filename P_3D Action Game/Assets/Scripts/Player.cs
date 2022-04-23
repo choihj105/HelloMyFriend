@@ -187,7 +187,7 @@ public class Player : MonoBehaviour
             if (Physics.Raycast(ray, out rayHit, 100))
             {
 
-                Vector3 nextVec = rayHit.point;
+                Vector3 nextVec = rayHit.point - transform.position;
                 nextVec.y = 15;
 
                 GameObject instantGrenade = Instantiate(grenadeObj, transform.position, transform.rotation);

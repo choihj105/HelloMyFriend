@@ -117,7 +117,6 @@ public class GameManager : MonoBehaviour
     IEnumerator InBattle()
     {
         if(stage % 5 == 0) {
-            
             enemyCntD++;
             GameObject instantEnemy = Instantiate(enemies[3], enemyZones[3].position, enemyZones[3].rotation);
             Enemy enemy = instantEnemy.GetComponent<Enemy>();
@@ -125,12 +124,10 @@ public class GameManager : MonoBehaviour
             enemy.manager = this;
             enemy.soundControl = soundControl;
             boss = instantEnemy.GetComponent<Boss>();
-            
-
         }
         else{
 
-            for (int index = 0; index < stage; index++)
+            for (int index = 0; index < stage * 2; index++)
             {
                 int ran = Random.Range(0, 3);
                 enemyList.Add(ran);

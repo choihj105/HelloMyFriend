@@ -251,8 +251,7 @@ public class Enemy : MonoBehaviour
                 reactVec += Vector3.up;
                 rigid.AddForce(reactVec * 5, ForceMode.Impulse);
             }
-            
-            
+
             Destroy(gameObject, 4);
         }
     }

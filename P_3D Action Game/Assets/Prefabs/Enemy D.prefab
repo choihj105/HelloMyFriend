@@ -102,9 +102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 3
-  maxHealth: 1000
-  curHealth: 1000
+  maxHealth: 1500
+  curHealth: 1500
   score: 2000
+  manager: {fileID: 0}
   Target: {fileID: 0}
   melleArea: {fileID: 5437199517561162256}
   bullet: {fileID: 8111812150326786007, guid: de38d1bcd0c1f6845914b73fdcc78163, type: 3}
@@ -120,29 +121,11 @@ MonoBehaviour:
   meshs: []
   nav: {fileID: 0}
   anim: {fileID: 0}
+  soundControl: {fileID: 0}
   missile: {fileID: 2366813664224045785, guid: 14a13d8ec5194534398797bc2093a155, type: 3}
   missilePortA: {fileID: 5437199516936097994}
   missilePortB: {fileID: 5437199516728265296}
   isLook: 1
---- !u!95 &5437199516287589338
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9162941763662592332}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9e178f0d7de6bd146abb146a6ba23a14, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5437199516728265311
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,6 +246,25 @@ MonoBehaviour:
   damage: 25
   isMelee: 1
   isRock: 0
+--- !u!95 &5437199516287589338
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9162941763662592332}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9e178f0d7de6bd146abb146a6ba23a14, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &8351968585278424093
 PrefabInstance:
   m_ObjectHideFlags: 0
