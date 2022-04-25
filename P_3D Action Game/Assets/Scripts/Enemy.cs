@@ -180,7 +180,7 @@ public class Enemy : MonoBehaviour
             
     public void HitByGrenade(Vector3 explosionPos)
     {
-        curHealth -= 100;
+        curHealth -= 300;
         Vector3 reactVec = transform.position - explosionPos;
         StartCoroutine(OnDamage(reactVec, true));
     }
@@ -213,7 +213,7 @@ public class Enemy : MonoBehaviour
 
                 int ranCoin = Random.Range(0, 3);
                 Instantiate(coins[ranCoin], transform.position, Quaternion.identity);
-                yield return new WaitForSeconds(0.1f);
+                //yield return new WaitForSeconds(0.1f);
 
 
                 switch (enemyType)
