@@ -163,6 +163,7 @@ public class Enemy : MonoBehaviour
             Weapon weapon = other.GetComponent<Weapon>();
             curHealth -= weapon.damage;
             Vector3 reactVec = transform.position - other.transform.position;
+            
 
             StartCoroutine(OnDamage(reactVec, false));
         }
@@ -195,6 +196,18 @@ public class Enemy : MonoBehaviour
             foreach (MeshRenderer mesh in meshs)
                 mesh.material.color = Color.white;
             soundControl.enemyOnDamageSound.Play();
+
+            // ³Ë¹é
+            //reactVec = reactVec.normalized;
+            //reactVec += Vector3.up;
+            
+            rigid.AddForce(transform.forward * -10, ForceMode.Impulse);
+
+            yield return new WaitForSeconds(0.5f);
+
+            rigid.velocity = Vector3.zero;
+
+            //Debug.Log("Ãâ·Â");
         }
         else {
             if (!isDead)
@@ -242,8 +255,8 @@ public class Enemy : MonoBehaviour
                 reactVec += Vector3.up * 3;
 
                 rigid.freezeRotation = false; // freezeRotation
-                rigid.AddForce(reactVec * 5, ForceMode.Impulse);
-                rigid.AddTorque(reactVec * 15, ForceMode.Impulse);
+                rigid.AddForce(reactVec * 10, ForceMode.Impulse);
+                rigid.AddTorque(reactVec * 45, ForceMode.Impulse);
             }
             else
             {
