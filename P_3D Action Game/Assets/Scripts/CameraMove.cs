@@ -26,6 +26,7 @@ public class CameraMove : MonoBehaviour
 
         dirNormarized = realCamera.localPosition.normalized;
         finalDistance = realCamera.localPosition.magnitude;
+        Debug.Log(finalDistance);
     }
 
     void Update()
