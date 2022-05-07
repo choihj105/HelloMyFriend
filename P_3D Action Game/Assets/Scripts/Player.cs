@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public GameObject grenadeObj;
     public Camera followCamera;
     public GameManager gamemanager;
+    public Transform cameraArm;
 
     public SoundControl soundControl;
 
@@ -104,8 +105,16 @@ public class Player : MonoBehaviour
 
     void Move()
     {
+        Vector2 moveInput = new Vector2(hAxis, vAxis);
+        // 고칠점
+        Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
+        Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.forward.z).normalized;
+        Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
+
         // x y z
-        moveVec = new Vector3(hAxis, 0, vAxis).normalized;
+        moveVec = moveDir;
+        //moveVec = transform.rotation * new Vector3(hAxis, 0, vAxis).normalized;
+        transform.forward = moveDir;
 
         // 회피 시 업데이트 안되게
         if (isDodge)
@@ -150,11 +159,12 @@ public class Player : MonoBehaviour
         {
             Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
+            int layerMask = (-1) - (1 << LayerMask.NameToLayer("Player"));
             // out 키워드는, 반환값을 주어진 변수에 저장하는 키워드
-            if (Physics.Raycast(ray, out rayHit, 100))
+            if (Physics.Raycast(ray, out rayHit, 100, layerMask))
             {
                 Vector3 nextVec = rayHit.point;
-                nextVec.y = 0;
+                //nextVec.y = 0;
                 transform.LookAt(nextVec);
             }
         }
