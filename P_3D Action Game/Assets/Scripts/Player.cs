@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     bool sDown2;
     bool sDown3;
 
+    bool isMove;
     bool isJump;
     bool isDodge;
     bool isSwap;
@@ -105,16 +106,22 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        Vector2 moveInput = new Vector2(hAxis, vAxis);
+        Vector2 moveInput = new Vector2(hAxis, vAxis).normalized;
         // 고칠점
-        Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
-        Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.forward.z).normalized;
-        Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
 
-        // x y z
-        moveVec = moveDir;
-        //moveVec = transform.rotation * new Vector3(hAxis, 0, vAxis).normalized;
-        transform.forward = moveDir;
+        isMove = moveInput.magnitude != 0;
+
+        if (isMove)
+        {
+            Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
+            Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
+            Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
+
+            // x y z
+            moveVec = moveDir;
+            //moveVec = transform.rotation * new Vector3(hAxis, 0, vAxis).normalized;
+            
+        }
 
         // 회피 시 업데이트 안되게
         if (isDodge)
@@ -124,27 +131,24 @@ public class Player : MonoBehaviour
         if (isSwap || !isFireReady || isDead)
             moveVec = Vector3.zero;
 
-
         // transform + 벽뚫방지
-        if (!isBorder)
+        if (!isBorder && isMove)
             transform.position += moveVec * (rDown ? 1.3f : 1f) * speed * Time.deltaTime;
 
         // animator
-        anim.SetBool("isWalk", moveVec != Vector3.zero);
+        anim.SetBool("isWalk", isMove);
         anim.SetBool("isRun", rDown);
 
         // sound
-        if(soundControl.walkSound.isPlaying == false && moveVec != Vector3.zero && !isJump && !isDodge && !isDead) {
+        if (soundControl.walkSound.isPlaying == false && isMove && !isJump && !isDodge && !isDead)
+        {
             soundControl.walkSound.volume = Random.Range(0.1f, 0.2f);
-
-            if (rDown) 
+            if (rDown)
                 soundControl.walkSound.pitch = Random.Range(2.6f, 2.65f);
-            else 
+            else
                 soundControl.walkSound.pitch = Random.Range(2.1f, 2.2f);
-            
             soundControl.walkSound.Play();
         }
-        
     }
     
     void Turn()
