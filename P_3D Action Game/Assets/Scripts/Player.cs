@@ -120,6 +120,7 @@ public class Player : MonoBehaviour
             // x y z
             moveVec = moveDir;
             //moveVec = transform.rotation * new Vector3(hAxis, 0, vAxis).normalized;
+            //transform.forward = moveDir;
             
         }
 
@@ -168,7 +169,7 @@ public class Player : MonoBehaviour
             if (Physics.Raycast(ray, out rayHit, 100, layerMask))
             {
                 Vector3 nextVec = rayHit.point;
-                //nextVec.y = 0;
+                nextVec.y = 0;
                 transform.LookAt(nextVec);
             }
         }
@@ -176,7 +177,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if (jDown && moveVec == Vector3.zero && !isJump && !isDodge && !isDead) {
+        if (jDown && !isMove && !isJump && !isDodge && !isDead) {
             // 물리엔진에 힘을 준다. 여기선 즉발적인 Impulse
             rigid.AddForce(Vector3.up * 15, ForceMode.Impulse);
             anim.SetBool("isJump", true);

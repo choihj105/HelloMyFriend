@@ -67,7 +67,6 @@ public class Weapon : MonoBehaviour
         GameObject instantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
         Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
         bulletRigid.velocity = bulletPos.forward * 50;         // velocity 속력주기
-
         yield return null;
         // 2. 탄피 배출
         GameObject instantCase = Instantiate(bulletCase, bulletCasePos.position, bulletCasePos.rotation);
