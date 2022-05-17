@@ -334,6 +334,7 @@ MonoBehaviour:
   - you can buy anything you want !
   - I'm sorry, Will you come next time ?
   talkText: {fileID: 486118345}
+  weaponPointImg: {fileID: 1349867659}
 --- !u!135 &6012567
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10654,8 +10655,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 72162744}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 55}
-  m_LocalScale: {x: 110, y: 10, z: 10}
+  m_LocalPosition: {x: 0, y: 3, z: 150}
+  m_LocalScale: {x: 310, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 968479178}
   m_RootOrder: 2
@@ -40609,8 +40610,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969226841}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 55, y: 3, z: 0}
-  m_LocalScale: {x: 110.00004, y: 10, z: 10}
+  m_LocalPosition: {x: 150, y: 3, z: 0}
+  m_LocalScale: {x: 310, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 968479178}
   m_RootOrder: 3
@@ -46707,8 +46708,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099285272}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -55}
-  m_LocalScale: {x: 110, y: 10, z: 10}
+  m_LocalPosition: {x: -0, y: 3, z: -150}
+  m_LocalScale: {x: 310, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 968479178}
   m_RootOrder: 1
@@ -47210,6 +47211,7 @@ MonoBehaviour:
   - can you buy weapons if possible :)
   - oh,, you have not enough money :(
   talkText: {fileID: 1869046831}
+  weaponPointImg: {fileID: 1349867659}
 --- !u!135 &1137216594
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -53541,8 +53543,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320844404}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -55, y: 3, z: 0}
-  m_LocalScale: {x: 110.00004, y: 10, z: 10}
+  m_LocalPosition: {x: -150, y: 3, z: 0}
+  m_LocalScale: {x: 310, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 968479178}
   m_RootOrder: 4
@@ -67230,7 +67232,7 @@ Transform:
   m_GameObject: {fileID: 2026665967}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 1.0005, z: 100}
+  m_LocalScale: {x: 300, y: 1.0005, z: 300}
   m_Children: []
   m_Father: {fileID: 968479178}
   m_RootOrder: 0

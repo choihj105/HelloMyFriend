@@ -12,14 +12,16 @@ public class Shop : MonoBehaviour
     public Transform[] itemPos;
     public string[] talkData;
     public Text talkText;
-
+    public Image weaponPointImg;
     Player enterPlayer;
 
     public void Enter(Player player)
     {
         CursorOn();
         enterPlayer = player;
+        weaponPointImg.enabled = false;
         uiGroup.anchoredPosition = Vector3.zero;
+        
     }
 
     
@@ -27,6 +29,7 @@ public class Shop : MonoBehaviour
     {
         CursorOff();
         anim.SetTrigger("doHello");
+        weaponPointImg.enabled = true;
         uiGroup.anchoredPosition = Vector3.down * 1000;
     }
 
