@@ -17,6 +17,7 @@ public class Shop : MonoBehaviour
 
     public void Enter(Player player)
     {
+        CursorOn();
         enterPlayer = player;
         uiGroup.anchoredPosition = Vector3.zero;
     }
@@ -24,6 +25,7 @@ public class Shop : MonoBehaviour
     
     public void Exit()
     {
+        CursorOff();
         anim.SetTrigger("doHello");
         uiGroup.anchoredPosition = Vector3.down * 1000;
     }
@@ -49,5 +51,18 @@ public class Shop : MonoBehaviour
         talkText.text = talkData[1];
         yield return new WaitForSeconds(2f);
         talkText.text = talkData[0];
+    }
+
+    void CursorOn()
+    {
+        // 마우스 커서
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    void CursorOff()
+    {
+        // 마우스 커서
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

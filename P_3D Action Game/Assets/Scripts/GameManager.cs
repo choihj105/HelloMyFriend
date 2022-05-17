@@ -65,6 +65,8 @@ public class GameManager : MonoBehaviour
         gamePanel.SetActive(true);
 
         player.gameObject.SetActive(true);
+
+        CursorOff();
     }
      public void GameOver()
     {
@@ -216,5 +218,18 @@ public class GameManager : MonoBehaviour
         else {
             bossHealthGroup.anchoredPosition = Vector3.up * 300;
         }
+    }
+
+    void CursorOff()
+    {
+        // 마우스 커서
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }    
+    void CursorOn()
+    {
+        // 마우스 커서
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

@@ -67,7 +67,6 @@ public class Player : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
         meshs = GetComponentsInChildren<MeshRenderer>();
-
     }
 
     // Update is called once per frame
@@ -159,9 +158,9 @@ public class Player : MonoBehaviour
 
         // #2. 마우스에 의한 회전
 
-        // Ray란?, ScreenPointToRay() : 스크린에서 월드로 Ray를 쏘는 함수
         if (fDown && !isDead)
         {
+            // Ray란?, ScreenPointToRay() : 스크린에서 월드로 Ray를 쏘는 함수
             Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
             int layerMask = (-1) - (1 << LayerMask.NameToLayer("Player"));
