@@ -46,6 +46,9 @@ public class GameManager : MonoBehaviour
     public Text curScoreText;
     public Text bestText;
 
+    bool isCancle;
+    bool jumpDown;
+
     public SoundControl soundControl;
     void Awake()
     {
@@ -174,7 +177,8 @@ public class GameManager : MonoBehaviour
     {
         if (isBattle)
             playTime += Time.deltaTime;
-        
+
+        Esc();
     }
 
     void LateUpdate() //Update 끝난 후 호출되는 생명주기
@@ -217,6 +221,22 @@ public class GameManager : MonoBehaviour
         }
         else {
             bossHealthGroup.anchoredPosition = Vector3.up * 300;
+        }
+    }
+
+    void Esc()
+    {
+        bool jumpDown = Input.GetButtonDown("Cancel");
+        
+        if (jumpDown && !isCancle)
+        {
+            CursorOn();
+            isCancle = true;
+        }
+        else if (jumpDown && isCancle)
+        {
+            CursorOff();
+            isCancle = false;
         }
     }
 
