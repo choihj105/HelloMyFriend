@@ -66867,7 +66867,7 @@ MonoBehaviour:
   soundControl: {fileID: 1873523341}
   ammo: 100
   health: 100
-  coin: 5000
+  coin: 10000
   score: 0
   maxAmmo: 999
   maxHealth: 100
