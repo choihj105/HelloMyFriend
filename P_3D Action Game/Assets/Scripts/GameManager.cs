@@ -46,8 +46,8 @@ public class GameManager : MonoBehaviour
     public Text curScoreText;
     public Text bestText;
 
-    bool isCancle;
-    bool jumpDown;
+    bool isCancel;
+    bool escDown;
 
     public SoundControl soundControl;
     void Awake()
@@ -226,17 +226,17 @@ public class GameManager : MonoBehaviour
 
     void Esc()
     {
-        bool jumpDown = Input.GetButtonDown("Cancel");
-        
-        if (jumpDown && !isCancle)
+        escDown = Input.GetButtonDown("Cancel");
+
+        if (escDown && !isCancel)
         {
             CursorOn();
-            isCancle = true;
+            isCancel = true;
         }
-        else if (jumpDown && isCancle)
+        else if (escDown && isCancel)
         {
             CursorOff();
-            isCancle = false;
+            isCancel = false;
         }
     }
 
