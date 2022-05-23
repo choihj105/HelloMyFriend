@@ -28,6 +28,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        Spwan();
         DisconnectPanel.SetActive(false);
     }
 
@@ -36,6 +37,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if (Input.GetKeyDown(KeyCode.Escape) && PhotonNetwork.IsConnected)
                 PhotonNetwork.Disconnect(); 
     }
+
+    public void Spwan()
+    {
+        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        RespwanPanel.SetActive(false);
+        
+    }
+
 
     public override void OnDisconnected(DisconnectCause cause)
     {
