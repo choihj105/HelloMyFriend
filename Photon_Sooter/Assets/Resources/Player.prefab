@@ -232,6 +232,7 @@ MonoBehaviour:
   PV: {fileID: 5820224947684840440}
   NicknameText: {fileID: 8674121684795808454}
   HealthImage: {fileID: 5599871841706911840}
+  speed: 4
 --- !u!1 &2537033714466341738
 GameObject:
   m_ObjectHideFlags: 0
