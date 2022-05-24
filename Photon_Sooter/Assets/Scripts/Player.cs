@@ -18,6 +18,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     
     float axis;
     bool jDown;
+    bool sDown;
 
     bool isGround;
     Vector3 curPos;
@@ -33,19 +34,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (PV.IsMine)
         {
             GetInput();
-
-            //이동
             Move();
-
-            //점프
             Jump();
+            Shot();
         }
     }
 
     void GetInput()
     {
         axis = Input.GetAxisRaw("Horizontal");
-        jDown = Input.GetButtonDown("Jump");
+        jDown = Input.GetButtonDown("Vertical");
+        sDown = Input.GetButtonDown("Shot");
     }
 
     void Move()
@@ -77,7 +76,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     void JumpRPC()
     {
         RB.velocity = Vector2.zero;
-        RB.AddForce(Vector2.up * 500);
+        RB.AddForce(Vector2.up * 600);
+    }
+
+    void Shot()
+    {
+        if (sDown)
+        {
+            PhotonNetwork.Instantiate("Bullet", transform.position + new Vector3(SR.flipX ? -0.4f : 0.4f, -0.11f, 0), Quaternion.identity)
+                .GetComponent<PhotonView>().RPC("DirRPC", RpcTarget.All, SR.flipX ? -1:1);
+            AN.SetTrigger("shot");
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
