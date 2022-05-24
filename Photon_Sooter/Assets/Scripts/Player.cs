@@ -15,8 +15,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public Image HealthImage;
 
     public int speed;
+    
     float axis;
-
+    bool jDown;
 
     bool isGround;
     Vector3 curPos;
@@ -35,12 +36,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             //이동
             Move();
+
+            //점프
+            Jump();
         }
     }
 
     void GetInput()
     {
         axis = Input.GetAxisRaw("Horizontal");
+        jDown = Input.GetButtonDown("Jump");
     }
 
     void Move()
@@ -58,6 +63,31 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void FlipXRPC(float axis) => SR.flipX = axis == -1;
 
+    void Jump()
+    {
+        if(jDown && isGround)
+        {
+            isGround = false;
+            AN.SetBool("jump", true);
+            PV.RPC("JumpRPC", RpcTarget.All);
+        }
+    }
+
+    [PunRPC]
+    void JumpRPC()
+    {
+        RB.velocity = Vector2.zero;
+        RB.AddForce(Vector2.up * 700);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGround = true;
+            AN.SetBool("jump", false);
+        }
+    }
 
     // 변수 동기화
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
