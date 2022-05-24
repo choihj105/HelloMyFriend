@@ -38,6 +38,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             Jump();
             Shot();
         }
+
+        // 다른 플레이어들을 부드럽게 위치 동기화 시켜줍니다.
+        else if ((transform.position - curPos).sqrMagnitude >= 100) transform.position = curPos;
+        else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
     }
 
     void GetInput()
@@ -89,6 +93,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+     public void OnDamage()
+    {
+        HealthImage.fillAmount -= 0.1f;
+        if(HealthImage.fillAmount <= 0)
+        {
+            GameObject.Find("Canvas").transform.Find("RespawnPanel").gameObject.SetActive(true);
+            PV.RPC("DestroyRPC", RpcTarget.AllBuffered); // AllBuffered를 해야 복제 버그가 안생깁니다.
+        }
+    }
+
+    [PunRPC]
+    void DestroyRPC() => Destroy(gameObject);
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
@@ -101,6 +118,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     // 변수 동기화
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        //throw new System.NotImplementedException();
+        if (stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(HealthImage.fillAmount);
+        }
+        else
+        {
+            curPos = (Vector3)stream.ReceiveNext();
+            HealthImage.fillAmount = (float)stream.ReceiveNext();
+        }
     }
 }
