@@ -77,7 +77,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     void JumpRPC()
     {
         RB.velocity = Vector2.zero;
-        RB.AddForce(Vector2.up * 700);
+        RB.AddForce(Vector2.up * 500);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
