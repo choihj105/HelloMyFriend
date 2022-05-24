@@ -46,13 +46,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     void Move()
     {
         RB.velocity = new Vector2( speed * axis, RB.velocity.y);
-
+ 
         if (axis != 0)
         {
-            AN.SetBool("Walk", true);
             PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis); // 재접속시 flipX를 동기화 해주기 위해 AllBuffered
         }
-        else AN.SetBool("Walk", false);
+        AN.SetBool("walk", axis != 0);
+
     }
 
     [PunRPC]
