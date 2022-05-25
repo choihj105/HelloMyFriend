@@ -30,12 +30,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Spwan();
         DisconnectPanel.SetActive(false);
+        StartCoroutine("DestroyBullet");
     }
 
-    void Update()
+    IEnumerator DestroyBullet()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && PhotonNetwork.IsConnected)
-                PhotonNetwork.Disconnect(); 
+        yield return new WaitForSeconds(0.2f);
+        foreach (GameObject GO in GameObject.FindGameObjectsWithTag("Bullet")) GO.GetComponent<PhotonView>().RPC("DestroyBulletRPC", RpcTarget.All);
     }
 
     public void Spwan()
@@ -45,6 +46,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && PhotonNetwork.IsConnected)
+            PhotonNetwork.Disconnect();
+    }
 
     public override void OnDisconnected(DisconnectCause cause)
     {
