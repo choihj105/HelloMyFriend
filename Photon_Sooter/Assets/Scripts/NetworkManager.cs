@@ -41,7 +41,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void Spwan()
     {
-        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player", new Vector3(Random.Range(-6f, 18f), 4, 0), Quaternion.identity);
         RespwanPanel.SetActive(false);
         
     }
