@@ -695,7 +695,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.52453536, y: -1.9187682, z: -3.580883}
+  m_LocalPosition: {x: -0.52989215, y: -1.8956006, z: -3.580883}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1260885633}
@@ -1031,10 +1031,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 8.995226, y: 5.0505486}
-      - {x: -8.95339, y: 4.8959985}
-      - {x: -8.949125, y: -5.0230293}
-      - {x: 9.131388, y: -5.061156}
+    - - {x: 20.522163, y: 11.586541}
+      - {x: -9.590044, y: 11.626353}
+      - {x: -9.494829, y: -5.3868313}
+      - {x: 20.412981, y: -5.324466}
 --- !u!4 &786311021
 Transform:
   m_ObjectHideFlags: 0
@@ -1780,7 +1780,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7ecfe2d3fbf23034d95699ce71af9196, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
