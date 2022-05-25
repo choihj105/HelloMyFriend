@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 2118541580839978718}
   - component: {fileID: 2118541580839978713}
   - component: {fileID: 5820224947684840440}
-  - component: {fileID: 3882252318225306786}
   - component: {fileID: 7549856506246181966}
   - component: {fileID: 7356531640835496552}
+  - component: {fileID: 3882252318225306786}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -165,39 +165,12 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 3882252318225306786}
   - {fileID: 7549856506246181966}
+  - {fileID: 3882252318225306786}
   - {fileID: 7356531640835496552}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &3882252318225306786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118541580839978712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 1
-    Name: walk
-  - Type: 4
-    SynchronizeType: 1
-    Name: jump
-  - Type: 9
-    SynchronizeType: 1
-    Name: shot
-  m_SynchronizeLayers:
-  - SynchronizeType: 0
-    LayerIndex: 0
 --- !u!114 &7549856506246181966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,6 +206,33 @@ MonoBehaviour:
   NicknameText: {fileID: 8674121684795808454}
   HealthImage: {fileID: 5599871841706911840}
   speed: 4
+--- !u!114 &3882252318225306786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118541580839978712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 1
+    Name: walk
+  - Type: 4
+    SynchronizeType: 1
+    Name: jump
+  - Type: 9
+    SynchronizeType: 1
+    Name: shot
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &2537033714466341738
 GameObject:
   m_ObjectHideFlags: 0
