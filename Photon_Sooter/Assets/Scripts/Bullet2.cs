@@ -15,11 +15,13 @@ public class Bullet2 : MonoBehaviourPunCallbacks
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Ground") PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
+        if (collision.tag == "Ground") PV.RPC("DestroyBulletRPC", RpcTarget.AllBuffered);
+        
         if(!PV.IsMine && collision.tag == "Player" && collision.GetComponent<PhotonView>().IsMine)
         {
+            // Error!
             collision.GetComponent<Player>().OnDamage();
-            PV.RPC("DestoryRPC", RpcTarget.AllBuffered);
+            PV.RPC("DestroyBulletRPC", RpcTarget.AllBuffered);
         }
     }
 
@@ -27,7 +29,7 @@ public class Bullet2 : MonoBehaviourPunCallbacks
     void DirRPC(int dir) => this.dir = dir;
 
     [PunRPC]
-    void DestroyRPC() => Destroy(gameObject);
+    void DestroyBulletRPC() => Destroy(gameObject);
 
     
 }
